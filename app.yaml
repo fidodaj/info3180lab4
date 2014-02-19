@@ -1,0 +1,29 @@
+application: jt620046306
+version: lab3
+runtime: python27
+api_version: 1
+threadsafe: yes
+module: default
+
+handlers:
+- url: /(.*\.(appcache|manifest))
+  mime_type: text/cache-manifest
+  static_files: \1
+  upload: (.*\.(appcache|manifest))
+  expiration: "0m"
+
+
+- url: .*  # This regex directs all routes to main.app
+  script: main.app
+# here if you want to use them.  See
+# https://developers.google.com/appengine/docs/python/tools/libraries27 for
+# a list of libraries included in the SDK.  Third party libs that are *not* part
+# of the App Engine SDK don't need to be listed here, instead add them to your
+# project directory, either as a git submodule or as a plain subdirectory.
+# Note that dependencies must be located in your project directory - packages
+# installed in the Python environment are not loaded by the App Engine development
+# server or deployment tools.
+# TODO: List any other App Engine SDK libs you may need here.
+libraries:
+- name: jinja2
+  version: 2.6
